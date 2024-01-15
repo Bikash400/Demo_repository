@@ -51,14 +51,14 @@ namespace Demo.Controllers
             return Content($"Selected value: {selectedValue}");
         }
 
-        //public JsonResult ArnabMeetha(int value)
-        //{
-        //    JavaScriptSerializer js = new JavaScriptSerializer();
-        //    var option = js.Deserialize<int>(value.ToString());
-        //    //string value = js.Deserialize<int>( _jsonFetchData );
-        //    // Process the selectedValue as needed
+        public JsonResult ArnabMeetha(int value)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            var option = js.Deserialize<int>(value.ToString());
+            //string value = js.Deserialize<int>( _jsonFetchData );
+            // Process the selectedValue as needed
 
-        //    return Json(value, JsonRequestBehavior.AllowGet);
-        //}
+            return Json(value, JsonRequestBehavior.AllowGet);
+        }
     }
 }
