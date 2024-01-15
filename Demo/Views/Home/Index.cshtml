@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Dropdown Example";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Dropdown Example</title>
+</head>
+<body>
+    <h2>Simple Dropdown Example</h2>
+
+    <select id="dropdown">
+        <option value="">Select an option</option>
+    </select>
+
+    <button id="submitButton">Submit</button>
+
+    <div id="result"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Populate dropdown using AJAX
+            $.ajax({
+                url: '@Url.Action("GetStaticData", "Home")',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var dropdown = $('#dropdown');
+                    $.each(data, function (index, item) {
+                        dropdown.append($('<option>').text(item.Text).attr('value', item.Value));
+                    });
+                }
+            });
+
+            $('#submitButton').click(function () {
+                var selectedValue = $('#dropdown').val();
+
+
+                $.ajax({
+                    url: '@Url.Action("SubmitDropdownValue", "Home")',
+                    method: 'POST',
+                    data: { selectedValue: selectedValue },
+                    success: function (response) {
+                        $('#result').html(response);
+                    }
+                });
+            });
+
+            @*$('#submitButton').click(function () {
+                debugger
+                var _jsonFetchData = {};
+                _jsonFetchData.Value = $('#dropdown').val();
+
+                $.ajax({
+
+                    url: '@Url.Action("SubmitDropdownjson", "Home")',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(_jsonFetchData),
+                    context: document.body,
+                    success: function (response) {
+                        debugger
+                        $('#result').html(response);
+                    }
+                });
+            });*@
+        });
+    </script>
+</body>
+</html>
