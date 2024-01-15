@@ -51,7 +51,7 @@ namespace Demo.Controllers
             return Content($"Selected value: {selectedValue}");
         }
 
-        public JsonResult SubmitDropdownjson(int value)
+        public JsonResult ArnabMeetha(int value)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
             var option = js.Deserialize<int>(value.ToString());
